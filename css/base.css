@@ -1,0 +1,21 @@
+body {
+    color: #666;
+    font-family: "Arial", sans-serif;
+}
+
+h1{
+    text-align: center;
+    color:#fff;
+}
+
+.clearline{
+    clear:both;
+}
+
+#container{
+    width: 350px;
+    overflow: auto;
+    margin: 40px auto;
+    background:#666;
+    padding: 
+}
