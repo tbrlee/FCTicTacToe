@@ -14,47 +14,53 @@ $(function() {
         r3c2 = $("#row3col2"),
         r3c3 = $("#row3col3");
 
+function PlayerOCondition() {
+    r1c1.hasClass("o") && r1c2.hasClass("o") && r1c3.hasClass("o") ||
+    r2c1.hasClass("o") && r2c2.hasClass("o") && r2c3.hasClass("o") ||
+    r3c1.hasClass("o") && r3c2.hasClass("o") && r3c3.hasClass("o") ||
+    r1c1.hasClass("o") && r2c1.hasClass("o") && r3c1.hasClass("o") ||
+    r1c2.hasClass("o") && r2c2.hasClass("o") && r3c2.hasClass("o") ||
+    r1c3.hasClass("o") && r2c3.hasClass("o") && r3c3.hasClass("o") ||
+    r1c1.hasClass("o") && r2c2.hasClass("o") && r3c3.hasClass("o") ||
+    r1c3.hasClass("o") && r2c2.hasClass("o") && r3c1.hasClass("o") 
+}
+
+function PlayerXCondition() { 
+    r1c1.hasClass("x") && r1c2.hasClass("x") && r1c3.hasClass("x") ||
+    r2c1.hasClass("x") && r2c2.hasClass("x") && r2c3.hasClass("x") ||
+    r3c1.hasClass("x") && r3c2.hasClass("x") && r3c3.hasClass("x") ||
+    r1c1.hasClass("x") && r2c1.hasClass("x") && r3c1.hasClass("x") ||
+    r1c2.hasClass("x") && r2c2.hasClass("x") && r3c2.hasClass("x") ||
+    r1c3.hasClass("x") && r2c3.hasClass("x") && r3c3.hasClass("x") ||
+    r1c1.hasClass("x") && r2c2.hasClass("x") && r3c3.hasClass("x") ||
+    r1c3.hasClass("x") && r2c2.hasClass("x") && r3c1.hasClass("x")
+}
+
+function resetClassboard(){
+     $("#board li").removeClass("disable");
+     $("#board li").removeClass("o");
+     $("#board li").removeClass("x");
+}
+
         $('#board li').on('click', function() {
-            if(r1c1.hasClass("o") && r1c2.hasClass("o") && r1c3.hasClass("o") ||
-               r2c1.hasClass("o") && r2c2.hasClass("o") && r2c3.hasClass("o") ||
-               r3c1.hasClass("o") && r3c2.hasClass("o") && r3c3.hasClass("o") ||
-               r1c1.hasClass("o") && r2c1.hasClass("o") && r3c1.hasClass("o") ||
-               r1c2.hasClass("o") && r2c2.hasClass("o") && r3c2.hasClass("o") ||
-               r1c3.hasClass("o") && r2c3.hasClass("o") && r3c3.hasClass("o") ||
-               r1c1.hasClass("o") && r2c2.hasClass("o") && r3c3.hasClass("o") ||
-               r1c3.hasClass("o") && r2c2.hasClass("o") && r3c1.hasClass("o") 
-            ) 
+            if(PlayerOCondition()) 
             {
                 alert("Winner: o");
                 $("#board li").text("+");
-                $("#board li").removeClass("disable");
-                $("#board li").removeClass("o");
-                $("#board li").removeClass("x");
+               resetClassboard();
             }
 
-            else if(r1c1.hasClass("x") && r1c2.hasClass("x") && r1c3.hasClass("x") ||
-               r2c1.hasClass("x") && r2c2.hasClass("x") && r2c3.hasClass("x") ||
-               r3c1.hasClass("x") && r3c2.hasClass("x") && r3c3.hasClass("x") ||
-               r1c1.hasClass("x") && r2c1.hasClass("x") && r3c1.hasClass("x") ||
-               r1c2.hasClass("x") && r2c2.hasClass("x") && r3c2.hasClass("x") ||
-               r1c3.hasClass("x") && r2c3.hasClass("x") && r3c3.hasClass("x") ||
-               r1c1.hasClass("x") && r2c2.hasClass("x") && r3c3.hasClass("x") ||
-               r1c3.hasClass("x") && r2c2.hasClass("x") && r3c1.hasClass("x") 
-            ) 
+            else if(PlayerXCondition()) 
             {
                 alert("Winner: x");
-                $("#board li").text("+");
-                $("#board li").removeClass("disable");
-                $("#board li").removeClass("o");
-                $("#board li").removeClass("x");
+                $("#board li").text("$");
+                resetClassboard();
             }
 
             else if(turns == 9) {
                 alert("Game ends in a tie.");
-                $("#board li").text("+");
-                $("#board li").removeClass("disable");
-                $("#board li").removeClass("o");
-                $("#board li").removeClass("x");
+                $("#board li").text("$");
+                resetClassboard();
                 turns = 0;
             }
             else if($(this).hasClass("disable")) {
@@ -64,16 +70,8 @@ $(function() {
                 turns++;
                 $(this).text(o);
                 $(this).addClass("disable o");
-                if(r1c1.hasClass("o") && r1c2.hasClass("o") && r1c3.hasClass("o") ||
-               r2c1.hasClass("o") && r2c2.hasClass("o") && r2c3.hasClass("o") ||
-               r3c1.hasClass("o") && r3c2.hasClass("o") && r3c3.hasClass("o") ||
-               r1c1.hasClass("o") && r2c1.hasClass("o") && r3c1.hasClass("o") ||
-               r1c2.hasClass("o") && r2c2.hasClass("o") && r3c2.hasClass("o") ||
-               r1c3.hasClass("o") && r2c3.hasClass("o") && r3c3.hasClass("o") ||
-               r1c1.hasClass("o") && r2c2.hasClass("o") && r3c3.hasClass("o") ||
-               r1c3.hasClass("o") && r2c2.hasClass("o") && r3c1.hasClass("o") 
-            ) {
-                alert("Side O won");
+                if(PlayerOCondition()) {
+                $("#message").text("O won the game");
                 turns=0;
 			  } 
 			}
@@ -81,39 +79,22 @@ $(function() {
                  turns++;
                 $(this).text(x);
                 $(this).addClass("disable x");
-                if(r1c1.hasClass("x") && r1c2.hasClass("x") && r1c3.hasClass("x") ||
-               r2c1.hasClass("x") && r2c2.hasClass("x") && r2c3.hasClass("x") ||
-               r3c1.hasClass("x") && r3c2.hasClass("x") && r3c3.hasClass("x") ||
-               r1c1.hasClass("x") && r2c1.hasClass("x") && r3c1.hasClass("x") ||
-               r1c2.hasClass("x") && r2c2.hasClass("x") && r3c2.hasClass("x") ||
-               r1c3.hasClass("x") && r2c3.hasClass("x") && r3c3.hasClass("x") ||
-               r1c1.hasClass("x") && r2c2.hasClass("x") && r3c3.hasClass("x") ||
-               r1c3.hasClass("x") && r2c2.hasClass("x") && r3c1.hasClass("x") 
-            ) {
-                alert("Side X won");
+                if(PlayerXCondition()) {
+                $("#message").text("X won the game");
                 turns=0;
                 }
             }   
 			});
                 //Resetting Game
                     $("#reset").click(function() {
-                    $("#board li").text("");
-                    $("#board li").removeClass('disable');
-                    $("#board li").removeClass('o');
-                    $("#board li").removeClass('x');
+                    $("#message").text("");
+                    $("#board li").text("$");
+                    resetClassboard();
                     turns = 0;
                 });
         
 
 });
 
-/*
-function OnePlayer() {
-
-}
-
-function TwoPlayers() {
 
 
-}
-) */

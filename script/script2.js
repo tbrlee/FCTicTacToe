@@ -26,7 +26,7 @@ $(function() {
             ) 
             {
                 alert("Winner: o");
-                $("#board li").text("+");
+                $("#board li").text("$");
                 $("#board li").removeClass("disable");
                 $("#board li").removeClass("o");
                 $("#board li").removeClass("x");
@@ -43,7 +43,7 @@ $(function() {
             ) 
             {
                 alert("Winner: x");
-                $("#board li").text("+");
+                $("#board li").text("$");
                 $("#board li").removeClass("disable");
                 $("#board li").removeClass("o");
                 $("#board li").removeClass("x");
@@ -51,7 +51,7 @@ $(function() {
 
             else if(turns == 9) {
                 alert("Game ends in a tie.");
-                $("#board li").text("+");
+                $("#board li").text("$");
                 $("#board li").removeClass("disable");
                 $("#board li").removeClass("o");
                 $("#board li").removeClass("x");
@@ -73,7 +73,7 @@ $(function() {
                r1c1.hasClass("o") && r2c2.hasClass("o") && r3c3.hasClass("o") ||
                r1c3.hasClass("o") && r2c2.hasClass("o") && r3c1.hasClass("o") 
             ) {
-                alert("Side O won");
+                $("#message").text("O won the game");//alert("Side O won"); 
                 turns=0;
 			  } 
 			}
@@ -90,14 +90,15 @@ $(function() {
                r1c1.hasClass("x") && r2c2.hasClass("x") && r3c3.hasClass("x") ||
                r1c3.hasClass("x") && r2c2.hasClass("x") && r3c1.hasClass("x") 
             ) {
-                alert("Side X won");
+                $("#message").text("X won the game");//alert("Side X won");
                 turns=0;
                 }
             }   
 			});
                 //Resetting Game
                     $("#reset").click(function() {
-                    $("#board li").text("");
+                    $("#message").text("");
+                    $("#board li").text("$");
                     $("#board li").removeClass('disable');
                     $("#board li").removeClass('o');
                     $("#board li").removeClass('x');
@@ -106,14 +107,3 @@ $(function() {
         
 
 });
-
-/*
-function OnePlayer() {
-
-}
-
-function TwoPlayers() {
-
-
-}
-) */
